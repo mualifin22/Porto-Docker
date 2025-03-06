@@ -1,5 +1,5 @@
 @extends('front/layouts/app')
-@section('title', 'Book a Meeting')
+@section('title', 'Book a Meeting | InumaDev')
 @section('content')
 
 <section id="Content" class="bg-portto-black flex min-h-screen">
