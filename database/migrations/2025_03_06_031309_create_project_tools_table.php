@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tool_id')->constrained()->cascadeOnDelete();
             $table->foreignId('project_id')->constrained()->cascadeOnDelete();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
