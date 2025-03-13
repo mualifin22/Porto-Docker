@@ -12,7 +12,7 @@ class ProjectToolController extends Controller
      */
     public function index()
     {
-        //
+        return view('project-tools.index');
     }
 
     /**
