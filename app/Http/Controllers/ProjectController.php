@@ -85,7 +85,31 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'category' => 'required|string|in:Website Development,UIUX Design,Mobile App Development,SEO,Digital Marketing',
+            'cover' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'about' => 'required|string|max:65535',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            if ($request->hasFile('cover')) {
+                $path = $request->file('cover')->store('projects', 'public');
+                $validated['cover'] = $path;
+            }
+            $validated['slug'] = Str::slug($request->name);
+
+            $project->update($validated);
+
+            DB::commit();
+
+            return redirect()->route('admin.projects.index')->with('success', 'Project update successfully');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Something went wrong', $e->getMessage());
+        }
     }
 
     /**
