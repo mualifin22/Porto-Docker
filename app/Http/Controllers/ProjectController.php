@@ -14,7 +14,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('admin.projects.index');
+        $projects = Project::orderBy('id', 'desc')->get();
+        return view('admin.projects.index', [
+            'projects' => $projects
+        ]);
     }
 
     /**
@@ -32,7 +35,7 @@ class ProjectController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'category' => 'required|string|in:web,uiux,app,seo,marketing',
+            'category' => 'required|string|in:Website Development,UIUX Design,Mobile App Development,SEO,Digital Marketing',
             'cover' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'about' => 'required|string|max:65535',
         ]);
@@ -72,7 +75,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', [
+            'project' => $project
+        ]);
     }
 
     /**

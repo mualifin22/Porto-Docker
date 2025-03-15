@@ -14,16 +14,17 @@
                 <hr class="my-10">
                 <div class="flex flex-col gap-y-5">
                     {{-- melakukan foreach dari table project --}}
+                    @forelse ($projects as $project)
                     <div class="item-project flex flex-row items-center justify-between">
                         <div class="flex flex-row items-center gap-x-5">
-                            <img src="{{ asset('Doraemon.png') }}" alt=""
+                            <img src="{{ Storage::url($project->cover) }}" alt=""
                                 class="object-cover w-[120px] h-[90px] rounded-2xl">
                             <div class="flex flex-col gap-y-1">
                                 <h3 class="font-bold text-xl">
-                                    Portoku
+                                    {{ $project->name }}
                                 </h3>
                                 <p class="text-sm text-slate-400">
-                                    Mobile Development
+                                    {{ $project->category }}
                                 </p>
                             </div>
                         </div>
@@ -36,7 +37,7 @@
                             </a>
                         </div>
                         <div class="flex flex-row gap-x-2">
-                            <a href="#" class="py-3 px-5 rounded-full bg-indigo-500 text-white">
+                            <a href="{{ route('admin.projects.edit', $project) }}" class="py-3 px-5 rounded-full bg-indigo-500 text-white">
                                 Edit
                             </a>
                             <a href="#" class="py-3 px-5 rounded-full bg-red-500 text-white">
@@ -44,6 +45,11 @@
                             </a>
                         </div>
                     </div>
+                    @empty
+                    <p>
+                        Belum ada project tersedia.
+                    </p>
+                    @endforelse
                 </div>
             </div>
         </div>

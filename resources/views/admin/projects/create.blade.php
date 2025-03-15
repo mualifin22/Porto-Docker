@@ -39,11 +39,11 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 required>
                                 <option value="">Select a category</option>
-                                <option value="web">Website Development</option>
-                                <option value="uiux">UIUX Design</option>
-                                <option value="app">Mobile App Development</option>
-                                <option value="seo">SEO</option>
-                                <option value="marketing">Digital Marketing</option>
+                                <option value="Website Development">Website Development</option>
+                                <option value="UIUX Design">UIUX Design</option>
+                                <option value="Mobile App Development">Mobile App Development</option>
+                                <option value="SEO">SEO</option>
+                                <option value="Digital Marketing">Digital Marketing</option>
                             </select>
                         </div>
                         <div class="flex flex-col gap-y-2">
