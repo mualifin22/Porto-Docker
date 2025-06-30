@@ -14,7 +14,7 @@ class ToolController extends Controller
      */
     public function index()
     {
-        $tools = Tool::all();
+        $tools = Tool::orderBy('id', 'desc')->get();
         return view('admin.tools.index', [
             'tools' => $tools
         ]);
@@ -122,7 +122,7 @@ class ToolController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.tools.index')->with('success', 'Tool deleted successfully.');
+            return redirect()->back()->with('success', 'Tool deleted successfully.');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors('error', 'Failed to delete tool: ', $e->getMessage());
