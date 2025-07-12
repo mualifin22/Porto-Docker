@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="flex flex-row gap-x-2">
-                            <a href="#" class="py-3 px-5 rounded-full bg-indigo-900 text-white">
+                            <a href="{{ route('admin.tool.assign', $project) }}" class="py-3 px-5 rounded-full bg-indigo-900 text-white">
                                 Add Tools
                             </a>
                             <a href="#" class="py-3 px-5 rounded-full bg-indigo-900 text-white">

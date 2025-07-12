@@ -5,6 +5,7 @@ use App\Http\Controllers\ToolController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectToolController;
 
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/details', [FrontController::class, 'details'])->name('front.details');
@@ -23,6 +24,11 @@ Route::middleware('auth')->group(function () {
         Route::resource('projects', ProjectController::class);
 
         Route::resource('tools', ToolController::class);
+
+        Route::get('/tool/assign/{project}', [ProjectToolController::class, 'create'])
+            ->name('tool.assign');
+        Route::post('/tool/assign/store/{project}', [ProjectToolController::class, 'store'])
+            ->name('tool.assign.store');
     });
 });
 

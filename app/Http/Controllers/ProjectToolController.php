@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\ProjectTool;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Tool;
+use App\Models\Project;
 
 class ProjectToolController extends Controller
 {
@@ -18,17 +21,38 @@ class ProjectToolController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Project $project)
     {
-        //
+        $tools = Tool::orderBy('id', 'desc')->get();
+        return view('admin.project_tools.create', [
+            'tools' => $tools,
+            'project' => $project
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Project $project)
     {
-        //
+        $validated = $request->validate([
+            'tool_id' => 'required|integer',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $validated['project_id'] = $project->id;
+
+            $assignedTool = ProjectTool::create($validated);
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Tool created successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors('error', 'Failed to create tool: ', $e->getMessage());
+        }
     }
 
     /**
