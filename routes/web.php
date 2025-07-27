@@ -25,6 +25,8 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('tools', ToolController::class);
 
+        Route::resource('project_tools', ProjectToolController::class);
+
         Route::get('/tool/assign/{project}', [ProjectToolController::class, 'create'])
             ->name('tool.assign');
         Route::post('/tool/assign/store/{project}', [ProjectToolController::class, 'store'])

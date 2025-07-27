@@ -44,7 +44,7 @@ class ProjectToolController extends Controller
         try {
             $validated['project_id'] = $project->id;
 
-            $assignedTool = ProjectTool::create($validated);
+            $assignedTool = ProjectTool::updateOrCreate($validated);
 
             DB::commit();
 
@@ -82,8 +82,19 @@ class ProjectToolController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProjectTool $projectTool)
+    public function destroy(ProjectTool $projectTool, Project $project)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            $projectTool->delete();
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Tool removed successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors('error', 'Failed to remove tool: ', $e->getMessage());
+        }
     }
 }

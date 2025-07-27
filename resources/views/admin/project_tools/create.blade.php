@@ -25,6 +25,20 @@
                     <div class="flex flex-col gap-y-5">
 
                         <h1 class="text-3xl text-indigo-950 text-bold">Assign Tool to Project</h1>
+
+                        <div class="flex flex-row items-center gap-x-5">
+                            <img src="{{ Storage::url($project->cover) }}" alt=""
+                                class="object-cover w-[120px] h-[90px] rounded-2xl">
+                            <div class="flex flex-col gap-y-1">
+                                <h3 class="font-bold text-xl">
+                                    {{ $project->name }}
+                                </h3>
+                                <p class="text-sm text-slate-400">
+                                    {{ $project->category }}
+                                </p>
+                            </div>
+                        </div>
+
                         <div class="flex flex-col gap-y-2">
                             <h3>
                                 Tools
@@ -46,6 +60,49 @@
                     </div>
 
                 </form>
+
+                <hr class="my-10">
+
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('Assigned Tools') }}
+                </h2>
+                <p class="text-sm text-slate-400 mb-5">
+                    List of tools assigned to this project.
+                </p>
+
+
+                <div class="flex flex-col gap-y-5">
+                    {{-- melakukan foreach dari table tools --}}
+                    @forelse ($project->tools as $tool)
+                    <div class="item-tool flex flex-row items-center justify-between">
+                        <div class="flex flex-row items-center gap-x-5">
+                            <img src="{{ Storage::url($tool->logo) }}" alt=""
+                                class="object-cover w-[120px] h-[90px] rounded-2xl">
+                            <div class="flex flex-col gap-y-1">
+                                <h3 class="font-bold text-xl">
+                                    {{ $tool->name }}
+                                </h3>
+                                <p class="text-sm text-slate-400">
+                                    {{ $tool->tagline }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex flex-row gap-x-2">
+                            <form action="{{ route('admin.project_tools.destroy', $tool->pivot->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="py-3 px-5 rounded-full bg-red-500 text-white">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    @empty
+                    <p>
+                        Belum ada tool tersedia.
+                    </p>
+                    @endforelse
+                </div>
 
             </div>
         </div>
