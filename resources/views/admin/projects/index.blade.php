@@ -32,7 +32,7 @@
                             <a href="{{ route('admin.tool.assign', $project) }}" class="py-3 px-5 rounded-full bg-indigo-900 text-white">
                                 Add Tools
                             </a>
-                            <a href="#" class="py-3 px-5 rounded-full bg-indigo-900 text-white">
+                            <a href="{{ route('admin.project_screenshots.create', $project) }}" class="py-3 px-5 rounded-full bg-indigo-900 text-white">
                                 Add Screenshoots
                             </a>
                         </div>
