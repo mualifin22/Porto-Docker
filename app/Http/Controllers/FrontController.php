@@ -9,15 +9,17 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $projects = Project::orderBy('id', 'desc')->get();
+        $projects = Project::orderBy('id', 'desc')->take(6)->get();
         return view('front.index', [
             'projects' => $projects
         ]);
     }
 
-    public function details()
+    public function details(Project $project)
     {
-        return view('front.details');
+        return view('front.details', [
+            'project' => $project
+        ]);
     }
 
     public function book()
