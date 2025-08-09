@@ -11,6 +11,7 @@ use App\Http\Controllers\ProjectScreenshotController;
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/details/{project:slug}', [FrontController::class, 'details'])->name('front.details');
 Route::get('/book', [FrontController::class, 'book'])->name('front.book');
+Route::post('/book/store', [FrontController::class, 'store'])->name('front.book.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -27,6 +28,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('tools', ToolController::class);
 
         Route::resource('project_tools', ProjectToolController::class);
+
+        Route::resource('project_orders', \App\Http\Controllers\ProjectOrderController::class);
 
         Route::get('/tool/assign/{project}', [ProjectToolController::class, 'create'])
         ->name('tool.assign');

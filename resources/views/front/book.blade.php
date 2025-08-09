@@ -23,7 +23,8 @@
                 <h1 class="font-extrabold text-[50px] leading-[75px]">Book a Meeting</h1>
                 <p class="text-lg">Tell me anything about your biggest future dreams</p>
             </div>
-            <form action="" class="flex flex-col gap-5 w-[550px]">
+            <form action="{{ route('front.book.store') }}" method="post" class="flex flex-col gap-5 w-[550px]">
+                @csrf
                 <label class="flex flex-col gap-[10px] font-semibold">
                     <span class="text-white">Complete Name</span>
                     <input type="text" name="name" id="name" class="bg-white rounded-full p-[14px_30px] appearance-none outline-none focus:ring-[3px] focus:ring-portto-green placeholder:font-normal placeholder:text-base placeholder:text-[#878C9C]" placeholder="Write your complete name" required>
@@ -37,7 +38,11 @@
                         <span class="text-white">Category</span>
                         <select name="category" id="category" class="font-semibold bg-white rounded-full p-[14px_30px] pr-[54px] appearance-none outline-none focus:ring-[3px] focus:ring-portto-green invalid:text-[#878C9C] invalid:font-normal bg-[url({{ asset('/images/icons/arrow-down.svg') }})] bg-no-repeat bg-[91%]" required>
                             <option value="" class="text-[#878C9C]" selected disabled hidden>Select category</option>
-                            <option value="" >Website Development</option>
+                                <option value="Website Development">Website Development</option>
+                                <option value="UIUX Design">UIUX Design</option>
+                                <option value="Mobile App Development">Mobile App Development</option>
+                                <option value="SEO">SEO</option>
+                                <option value="Digital Marketing">Digital Marketing</option>
                         </select>
                     </label>
                     <label class="flex flex-col gap-[10px] font-semibold w-full">

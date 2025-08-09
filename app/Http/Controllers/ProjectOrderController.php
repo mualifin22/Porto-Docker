@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\ProjectOrder;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,10 @@ class ProjectOrderController extends Controller
      */
     public function index()
     {
-        //
+        $project_orders = ProjectOrder::orderBy('id', 'desc')->get();
+        return view('admin.project_orders.index', [
+            'project_orders' => $project_orders
+        ]);
     }
 
     /**
@@ -36,7 +40,9 @@ class ProjectOrderController extends Controller
      */
     public function show(ProjectOrder $projectOrder)
     {
-        //
+        return view('admin.project_orders.show', [
+            'project_order' => $projectOrder
+        ]);
     }
 
     /**
